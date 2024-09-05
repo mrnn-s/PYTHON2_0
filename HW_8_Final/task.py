@@ -5,19 +5,19 @@
 # Для файлов сохраните его размер в байтах, а для директорий размер файлов в ней с учётом всех вложенных файлов и директорий.
 
 import os
+from pathlib import Path
 import json
 import csv
-import pickle
 
-myList = []
+myList = ['уроцлфы','test']
 p = 'c:\\temp'
 
 def sumFunc(p):
-    sumF = 0                                #в эту переменную помещаем размер файла
-    sum = 0                                 # сюда докладывать сумму папок
+    sumF = 0                                #в эту переменную буду помещаю размер файла
+    sum = 0                                 #а сюда докладывать сумму папок
     for i in os.walk(p, topdown=False):     
         pathF = i[0]                        #адрес
-        dirName = os.path.split(i[0])[1]    
+        dirName = os.path.split(i[0])[1]    #непонятная переменная
         adres = i[0]                        
         fileList = i[2]                     #список файлов в папке
         if len(fileList)>0 :                
@@ -44,5 +44,6 @@ def writeToFiles(data, nameF):
             csv_write.writerows(data)
     with open(nameF + ".pickle", 'wb') as outfile_p:
         pickle.dump(data, outfile_p)
+
 sumFunc(p)
 writeToFiles(myList, 'sumSize')
